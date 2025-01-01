@@ -4,4 +4,6 @@ ___
 This is the main repository for all of the projects in my learning.
 | #             | Project       | Live Demo |
 | ------------- |:-------------:| -----:    |
-| 1             | Weather App   | [Live Demo](https://menaadel12.github.io/portfolio1/weather_app_js/) |
+| 1             | Weather App   | [Live Demo](https://menaadel12.github.io/JS_Projects/Weather%20App/) |
+| 2             | To-Do-List App   | [Live Demo](https://menaadel12.github.io/JS_Projects/To-Do-List%20App/) |
+| 3             | Quiz App   | [Live Demo](https://menaadel12.github.io/JS_Projects/Quiz%20App/) |
