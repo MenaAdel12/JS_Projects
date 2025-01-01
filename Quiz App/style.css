@@ -1,0 +1,135 @@
+:root {
+  --background-color: #001e4d;
+  --app-background-color: #fff;
+  --text-color: #001e4d;
+  --border-color: #333;
+  --button-background-color: #fff;
+  --button-hover-background-color: #222;
+  --button-hover-text-color: #fff;
+  --disabled-cursor-color: not-allowed;
+  --next-button-background-color: #001e4d;
+  --next-button-hover-background-color: #00317f;
+  --correct-answer-background: #9aeabc;
+  --incorrect-answer-background: #ff9393;
+  --switching-mode: #ffffff;
+  --fill-svg: #555;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: var(--background-color);
+}
+.app {
+  background-color: var(--app-background-color);
+  width: 90%;
+  max-width: 600px;
+  margin: 100px auto 0;
+  border-radius: 10px;
+  padding: 30px;
+}
+.app h1 {
+  font-size: 25px;
+  color: var(--text-color);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 30px;
+}
+.quiz {
+  padding: 20px 0;
+}
+.quiz h2 {
+  font-size: 18px;
+  color: var(--text-color);
+  font-weight: 600;
+}
+.btn {
+  background-color: var(--button-background-color);
+  color: var(--text-color);
+  font-weight: 500;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  margin: 10px 0;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+.btn:hover:not([disabled]) {
+  background-color: var(--button-hover-background-color);
+  color: var(--button-hover-text-color);
+}
+.btn[disabled] {
+  cursor: var(--disabled-cursor-color);
+}
+#next-btn {
+  background-color: var(--next-button-background-color);
+  color: var(--button-hover-text-color);
+  font-weight: 500;
+  width: 150px;
+  border: 0;
+  padding: 10px;
+  margin: 20px auto 0;
+  border-radius: 4px;
+  cursor: pointer;
+  display: none;
+}
+#next-btn:hover {
+  background-color: var(--next-button-hover-background-color);
+}
+.correct {
+  background-color: var(--correct-answer-background);
+}
+.incorrect {
+  background-color: var(--incorrect-answer-background);
+}
+
+/*darkmode*/
+.dark-mode {
+  --background-color: #121212; /* Darker background */
+  --app-background-color: #1e1e1e; /* App container background */
+  --text-color: #e0e0e0; /* Light text color for contrast */
+  --border-color: #555; /* Lighter border for dark mode */
+  --button-background-color: #2e2e2e; /* Button background */
+  --button-hover-background-color: #444; /* Hover effect for dark mode */
+  --button-hover-text-color: #fff; /* Text remains white on hover */
+  --next-button-background-color: #333; /* Dark mode button color */
+  --next-button-hover-background-color: #555; /* Slightly lighter hover */
+  --correct-answer-background: #28a745; /* Slightly darker green */
+  --incorrect-answer-background: #dc3545; /* Slightly darker red */
+}
+#theme-switching {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--switching-mode);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  outline: 0;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+#theme-switching svg {
+  fill: var(--fill-svg);
+}
+#theme-switching svg:last-child {
+  display: none;
+}
+.dark-mode #theme-switching svg:first-child {
+  display: none;
+}
+.dark-mode #theme-switching svg:last-child {
+  display: block;
+}
+#theme-switching:hover {
+  background-color: #d6d6d6;
+}
