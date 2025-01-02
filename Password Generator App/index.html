@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator - App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Generate a <br /><span>Random Password</span></h1>
+      <div class="display">
+        <input type="text" id="password" placeholder="Password" />
+        <img src="images/copy.png" alt="copy-icon" />
+      </div>
+      <button id="generate-btn">
+        <img src="images/ai-application.png" />Generate Password
+      </button>
+      <div>
+        <fieldset class="generate-setting">
+          <legend>Settings</legend>
+          <div class="generate-setting-span">Password Length</div>
+          <div class="generate-setting-span fieldval">
+            <select id="password-length-selection">
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option selected value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+            </select>
+          </div>
+          <div class="generate-setting-span">Allow Symbols (!@#$%^&*()+)</div>
+          <div class="generate-setting-span fieldval">
+            <input type="checkbox" checked id="include-symbol-chkbox" />
+          </div>
+          <div class="generate-setting-span">Allow Numbers (0-9)</div>
+          <div class="generate-setting-span fieldval">
+            <input type="checkbox" checked id="include-number-chkbox" />
+          </div>
+          <div class="generate-setting-span">Exclude Duplicate Characters</div>
+          <div class="generate-setting-span fieldval">
+            <input type="checkbox" id="no-duplicate" />
+          </div>
+        </fieldset>
+        <p class="guidance">
+          <span
+            >Use the settings above to specify the length and character
+            parameters desired.</span
+          >
+        </p>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
