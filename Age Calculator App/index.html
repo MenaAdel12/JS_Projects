@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Calcualtor App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <h1>Javascript<br /><span> Age Calcualtor</span></h1>
+        <div class="input-box">
+          <input type="date" id="date" />
+          <button id="calc-btn">Calculate</button>
+        </div>
+        <p id="result"></p>
+      </div>
+    </div>
+    <script>
+      const userInput = document.getElementById("date");
+      const calculatorBtn = document.getElementById("calc-btn");
+      const result = document.getElementById("result");
+
+      userInput.max = new Date().toISOString().split("T")[0];
+
+      let year = "";
+      let month = "";
+      let day = "";
+
+      function isCalendarSelected() {
+        return userInput.value !== "";
+      }
+
+      function getDifferenceDay(currentDate, personDate) {
+        if (currentDate.getDate() >= personDate.getDate()) {
+          return currentDate.getDate() - personDate.getDate();
+        } else {
+          let lastDayInPreviousMonth = new Date(
+            personDate.getFullYear(),
+            personDate.getMonth(),
+            0
+          ).getDate();
+          return (
+            lastDayInPreviousMonth -
+            personDate.getDate() +
+            currentDate.getDate()
+          );
+        }
+      }
+
+      function getDifferenceMonth(currentDate, personDate) {
+        let monthDiff = null;
+        if (currentDate.getMonth() >= personDate.getMonth()) {
+          monthDiff = currentDate.getMonth() - personDate.getMonth();
+        } else {
+          monthDiff = currentDate.getMonth() - personDate.getMonth() + 12;
+        }
+
+        // Adjust the month difference if the current day is less than the person's day
+        if (currentDate.getDate() < personDate.getDate()) {
+          monthDiff--;
+        }
+
+        return monthDiff;
+      }
+
+      function getDifferenceYear(currentDate, personDate) {
+        let yearDifference =
+          currentDate.getFullYear() - personDate.getFullYear();
+        if (
+          currentDate.getMonth() < personDate.getMonth() ||
+          (currentDate.getMonth() === personDate.getMonth() &&
+            currentDate.getDate() < personDate.getDate())
+        ) {
+          yearDifference--;
+        }
+        return yearDifference;
+      }
+
+      function calculateDurations(currentDate, personDate) {
+        // Convert dates to milliseconds
+        const currentTime = currentDate.getTime();
+        const personTime = personDate.getTime();
+
+        // Calculate the difference in milliseconds
+        const differenceInMs = currentTime - personTime;
+
+        // Convert to desired units
+        const seconds = Math.floor(differenceInMs / 1000);
+        const minutes = Math.floor(differenceInMs / (1000 * 60));
+        const hours = Math.floor(differenceInMs / (1000 * 60 * 60));
+        const days = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+        const weeks = Math.floor(differenceInMs / (1000 * 60 * 60 * 24 * 7));
+        const remainingDays = days % 7;
+
+        return {
+          weeks: weeks,
+          days: days,
+          hours: hours,
+          minutes: minutes,
+          seconds: seconds,
+          remaining: remainingDays,
+        };
+      }
+
+      function showAge(date) {
+        let personDate = new Date(date);
+        let now = new Date();
+
+        day = getDifferenceDay(now, personDate);
+        month = getDifferenceMonth(now, personDate);
+        year = getDifferenceYear(now, personDate);
+
+        let duration = calculateDurations(now, personDate);
+
+        result.innerHTML = `You are <span>${year}</span> years, <span>${month}</span> months and <span>${day}</span> days old
+        <br/>or <span>${year * 12 + month}</span> months and <span>${day}</span> days
+        <br/>or <span>${duration.weeks}</span> weeks and <span>${duration.remaining}</span> days
+        <br/>or <span>${duration.days}</span> days
+        <br/>or <span>${duration.hours}</span> hours
+        <br/>or <span>${duration.minutes}</span> minutes
+        <br/>or <span>${duration.seconds}</span> seconds.`
+      }
+
+      calculatorBtn.addEventListener("click", () => {
+        if (!isCalendarSelected()) {
+          alert("Please, enter date first");
+          return;
+        }
+
+        showAge(userInput.value);
+      });
+    </script>
+  </body>
+</html>
