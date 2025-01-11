@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Generator</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="quote-box">
+      <h2>Quote of the day</h2>
+      <blockquote>Quote is loading...</blockquote>
+      <span>Author is loading...</span>
+      <div class="quote-box-btns">
+        <button id="new-quote-btn">New Quote</button>
+        <button id="tweet-btn">
+          <img src="images/twitter.png" alt="twitter logo" />Tweet
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const apiURL = "http://api.quotable.io/quotes/random";
+      const quote = document.querySelector("blockquote");
+      const author = document.querySelector(".quote-box span");
+      const btnNewQuote = document.getElementById("new-quote-btn");
+      const btnTweet = document.getElementById("tweet-btn");
+
+      async function getQuote(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+          return;
+        }
+        var data = await response.json();
+        updateQuote(data[0].content, data[0].author);
+      }
+
+      getQuote(apiURL);
+
+      function updateQuote(newQuote, newAuthor) {
+        quote.textContent = newQuote || "loading...";
+        author.textContent = newAuthor || "loading...";
+      }
+
+      function tweetQuote() {
+        window.open(
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${quote.textContent} ---- by ${author.textContent}`)}`,
+          "Tweet Window",
+          "width=600,height=300"
+        );
+      }
+
+      btnNewQuote.addEventListener("click", () => {
+        getQuote(apiURL);
+      });
+
+      btnTweet.addEventListener('click', () => {
+        tweetQuote();
+      })
+    </script>
+  </body>
+</html>
