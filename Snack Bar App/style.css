@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'sans-serif';
+}
+body {
+    background: #f7edff;
+}
+.buttons {
+    margin: 50px;
+}
+.buttons button {
+    background-color: #333;
+    color: #fff;
+    border: 0;
+    outline: 0;
+    width: 120px;
+    height: 40px;
+    margin: 5px;
+    cursor: pointer;
+}
+#toast-box {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: flex-end;
+    overflow: hidden;
+}
+#toast-box .toast {
+    width: 400px;
+    height: 80px;
+    background-color: #fff;
+    font-weight: 500;
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: translateX(100%);
+    animation: moveleft 0.5s linear forwards;
+}
+@keyframes moveleft {
+    100% {
+        transform: translateX(0);
+    }
+}
+.toast i {
+    margin: 0 20px;
+    font-size: 35px;
+    color: green;
+}
+.toast i.error {
+    color: red;
+}
+.toast i.invalid {
+    color: orange;
+}
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #e0e0e0;
+    position: absolute;
+    bottom: 0;
+    animation: finish-progress 4s linear;
+}
+@keyframes finish-progress {
+    0% {
+        width: 100%;
+    }25% {
+        width: 75%;
+    }50% {
+        width: 50%;
+    }75% {
+        width: 25%;
+    }100% {
+        width: 0;
+    }
+}
+.toast .prog-green {
+    background-color: green;
+}
+.toast .prog-orange {
+    background-color: orange;
+}
+.toast .prog-red {
+    background-color: red;
+}
