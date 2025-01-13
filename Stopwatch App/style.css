@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital@1&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: lightslategrey;
+  font-family: "Courier Prime", serif;
+  overflow: hidden;
+}
+.container-shadow {
+  width: 90%;
+  max-width: 600px;
+  margin: 200px auto 0;
+  background-image: url(images/stopwatch-back.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.stopwatch {
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 40px 0;
+  color: #fff;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+.stopwatch h1 {
+    margin: 60px 0 40px;
+    font-size: 64;
+    font-weight: 300;
+}
+.stopwatch .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btns img {
+    margin: 0 20px;
+    width: 50px;
+    cursor: pointer;
+}
+.btns img:nth-child(2) {
+    width: 80px;
+}
+.btns button {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}
+.start-msg {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 400px;
+    height: 80px;
+    background-color: #fff;
+    font-weight: 500;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(110%);
+    animation: moveleft 0.5s linear forwards, moveright 0.5s linear 1.5s forwards;
+    font-size: 24px;
+}
+@keyframes moveleft {
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes moveright {
+    100% {
+        transform: translateX(110%);
+    }
+}
