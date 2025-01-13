@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <p>Enter your text or URL</p>
+        <input type="text" placeholder="Text or URL" id="text-input">
+        <p class="error-message">You Should Write Anything!</p>
+        <button onclick="getQRCode()">Generate QR Code</button>
+
+        <div id="box-img">
+            <img src="" id="qr-img">
+        </div>    
+    </div>
+
+    <script>
+        const apiURL = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
+        const boxImg = document.getElementById('box-img');
+        const qrImg = document.getElementById('qr-img');
+        const inputValue = document.getElementById('text-input');
+        const errorMessage = document.querySelector('.error-message');
+
+        function getQRCode() {
+            if(inputValue.value.length > 0) {
+                qrImg.src = apiURL + inputValue.value;
+                boxImg.classList.add('show-img');
+            }else {
+                inputValue.classList.add('error');
+                errorMessage.style.display = "block";
+
+                setTimeout(() => {
+                    inputValue.classList.remove('error');
+                    errorMessage.style.display = "none"
+                }, 1000);
+            }
+        }
+        
+    </script>
+</body>
+</html>
