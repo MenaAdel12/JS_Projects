@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+            <nav>
+                <div class="circle">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="circle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+            <img src="media/song-img.png" class="song-img">
+            <h1>Btmna Ansak</h1>
+            <p>Sherine - Btmna Ansak | شيرين - بتمني انساك</p>
+            <audio controls id="song">
+                <source src="media/بتمني أنساك - دندنها.mp3" type="audio/mpeg">
+            </audio>
+            <input type="range" id="progress" value="0">
+            <div class="time-info">
+                <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+            </div>            
+            <div class="controls">
+                <div id="backwardBtn"><i class="fa-solid fa-backward"></i></div>
+                <div id="playBtn"><i class="fa-solid fa-play"></i></div>
+                <div id="forwardBtn"><i class="fa-solid fa-forward"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let btnPlay = document.getElementById('playBtn');
+        let song = document.getElementById('song');
+        let progress = document.getElementById('progress');
+        let currentTimeDisplay = document.getElementById('currentTime');
+        let totalTimeDisplay = document.getElementById('totalTime');
+        let skipForward = document.getElementById('forwardBtn');
+        let skipBackward = document.getElementById('backwardBtn');
+
+        btnPlay.addEventListener('click', () => {
+            if(btnPlay.childNodes[0].classList.contains('fa-play')) {
+                song.play();
+            }else {
+                song.pause();
+            }
+            changePlayAndPause();
+        })
+
+        song.addEventListener('loadedmetadata', () => {
+            if (!isNaN(song.duration)) {
+                progress.max = song.duration;
+                totalTimeDisplay.textContent = formatTime(song.duration);
+            }
+        });
+
+        song.addEventListener('timeupdate', () => {
+            if(!isNaN(song.currentTime)) {
+                progress.value = song.currentTime;
+                currentTimeDisplay.textContent = formatTime(song.currentTime);
+            }
+        })
+
+        progress.addEventListener('input', () => {
+            song.currentTime = progress.value;
+        })
+
+        
+        skipForward.addEventListener('click', () => {
+            song.currentTime = Math.min(song.currentTime + 10, song.duration);
+        });
+
+        skipBackward.addEventListener('click', () => {
+            song.currentTime = Math.max(song.currentTime - 10, 0);
+        });
+
+        function changePlayAndPause() {
+            btnPlay.childNodes[0].classList.toggle('fa-pause');
+            btnPlay.childNodes[0].classList.toggle('fa-play');
+        }
+
+        function formatTime(seconds) {
+            let mins = Math.floor(seconds / 60);
+            let secs = Math.floor(seconds % 60);
+            if (secs < 10) secs = `0${secs}`;
+            return `${mins}:${secs}`;
+        }
+    </script>
+</body>
+</html>
