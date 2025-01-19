@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form>
+                <div class="display">
+                    <input readonly type="text" id="display" style="cursor: auto;">
+                </div>
+                <div>
+                    <input type="button" value="AC" class="clr operator">
+                    <input type="button" value="DE" class="rmv operator">
+                    <input type="button" value="." class="operator">
+                    <input type="button" value="/" class="operator">
+                </div>
+                <div>
+                    <input type="button" value="7">
+                    <input type="button" value="8">
+                    <input type="button" value="9">
+                    <input type="button" value="*" class="operator">
+                </div>
+                <div>
+                    <input type="button" value="4">
+                    <input type="button" value="5">
+                    <input type="button" value="6">
+                    <input type="button" value="-" class="operator">
+                </div>
+                <div>
+                    <input type="button" value="1">
+                    <input type="button" value="2">
+                    <input type="button" value="3">
+                    <input type="button" value="+" class="operator">
+                </div>
+                <div>
+                    <input type="button" value="00">
+                    <input type="button" value="0">
+                    <input type="button" value="=" class="equal operator">
+                </div>    
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const btnsCalculator = document.querySelectorAll('input[type="button"]:not(.equal):not(.rmv):not(.clr)');
+        const display = document.getElementById('display');
+        const btnClear = document.querySelector('.clr');
+        const btnRemove = document.querySelector('.rmv');
+        const btnEqual = document.querySelector('.equal');
+
+        for(let i=0; i<btnsCalculator.length; i++) {
+            btnsCalculator[i].addEventListener('click', (e) => {
+                display.value += e.target.value;
+            }) 
+        }
+
+        btnRemove.addEventListener('click', deleteOneNumber);
+        btnClear.addEventListener('click', () => { display.value = '' });
+        btnEqual.addEventListener('click', () => {
+        try {
+            const result = Function('"use strict"; return (' + display.value + ')')();
+            display.value = result;
+        } catch (error) {
+            display.value = 'Error';
+        }
+})
+
+        function deleteOneNumber() {
+            const oldValue = display.value;
+            display.value = oldValue.slice(0, -1);
+        }
+    </script>
+</body>
+</html>

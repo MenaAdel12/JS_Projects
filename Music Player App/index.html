@@ -31,7 +31,7 @@
             <audio id="song">
                 <source src="media/بتمني أنساك - دندنها.mp3" type="audio/mpeg">
             </audio>
-            <input type="range" id="progress" value="0">
+            <input type="range" id="progress" value="0" min="0">
             <div class="time-info">
                 <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
             </div>            
@@ -73,19 +73,23 @@
                 progress.value = song.currentTime;
                 currentTimeDisplay.textContent = formatTime(song.currentTime);
             }
+            setProgressColor();
         })
 
         progress.addEventListener('input', () => {
+            setProgressColor();
             song.currentTime = progress.value;
         })
 
         
         skipForward.addEventListener('click', () => {
             song.currentTime = Math.min(song.currentTime + 10, song.duration);
+            setProgressColor();
         });
 
         skipBackward.addEventListener('click', () => {
             song.currentTime = Math.max(song.currentTime - 10, 0);
+            setProgressColor();
         });
 
         function changePlayAndPause() {
@@ -98,6 +102,15 @@
             let secs = Math.floor(seconds % 60);
             if (secs < 10) secs = `0${secs}`;
             return `${mins}:${secs}`;
+        }
+
+        function setProgressColor() {
+            const min = progress.min;
+            const max = progress.max;
+            const value = progress.value;
+
+            const percentage = ((value - min) / (max - min)) * 100;
+            progress.style.background = `linear-gradient(to right, #f53192 ${percentage}%, #ddd ${percentage}%)`
         }
     </script>
 </body>
