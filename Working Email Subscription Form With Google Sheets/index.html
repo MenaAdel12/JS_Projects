@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Working Email Subscription Form</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="hero">
+      <h3>Coming Soon!</h3>
+      <h1>Our Brand New<br />Website Is On It's Way</h1>
+      <p>Subscribe For More Details.</p>
+      <form name="submit-to-google-sheet">
+        <input
+          type="text"
+          name="Email"
+          required
+          placeholder="Enter your email"
+        />
+        <button type="submit">
+          <img src="images/send-icon.png" width="30px" />
+        </button>
+      </form>
+      <span id="message"></span>
+    </div>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbxGru9dBDolL1LllzNA_YJXXN8gdOYd_h-m4liaIUC1AD0Q98AnBIXFftAc95xSMiHS/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const msg = document.getElementById("message");
+      const inputField = document.querySelector("form input");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = inputField.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+          msg.textContent = "Please enter a valid email address.";
+          msg.style.color = "rgb(239, 36, 36)";
+          return;
+        }
+
+        msg.textContent = "Sending...";
+        msg.style.color = "#98fb03";
+        inputField.style.cursor = "no-drop"
+        inputField.disabled = true;
+
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then(() => {
+            msg.textContent = "Thank You For Subscribing!";
+            msg.style.color = "#61b752";
+
+            setTimeout(() => {
+              msg.textContent = null;
+              inputField.style.cursor = "text";
+              inputField.disabled = false;
+              form.reset();
+            }, 5000);
+          })
+          .catch(() => {
+            msg.textContent = "An error occurred, try again.";
+            msg.style.color = "rgb(239, 36, 36)";
+            setTimeout(() => {
+              msg.textContent = null;
+              form.reset();
+            }, 5000);
+          });
+      });
+    </script>
+  </body>
+</html>
