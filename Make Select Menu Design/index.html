@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Make Select Menu Design</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="hero">
+        <div class="selector">
+            <div class="selectField">
+                <p>Select Social Media</p>
+                <img src="SelectMenu_Img/arrow.png" id="arrowIcon">
+            </div>
+
+            <ul class="hidden">
+                <li>
+                    <img src="SelectMenu_Img/facebook.png">
+                    <p>Facebook</p>
+                </li>
+                <li>
+                    <img src="SelectMenu_Img/instagram.png">
+                    <p>Instagram</p>
+                </li>
+                <li>
+                    <img src="SelectMenu_Img/pinterest.png">
+                    <p>Pinterest</p>
+                </li>
+                <li>
+                    <img src="SelectMenu_Img/twitter.png">
+                    <p>Twitter</p>
+                </li>
+                <li>
+                    <img src="SelectMenu_Img/whatsapp.png">
+                    <p>Whatsapp</p>
+                </li>
+                <li>
+                    <img src="SelectMenu_Img/youtube.png">
+                    <p>Youtube</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const selectField = document.querySelector('.selectField');
+        const IconList = document.querySelector('.selector ul');
+        const choice = document.querySelector('.selectField p');
+        const choiceNames = document.querySelectorAll('.selector ul li p');
+        const arrowIcon = document.getElementById('arrowIcon');
+
+        // List Items
+        const listOfItems = document.querySelectorAll('.selector ul li');
+
+        selectField.addEventListener('click', () => {
+            IconList.classList.toggle('hidden')
+            arrowIcon.classList.toggle('rotate');
+        })
+
+        listOfItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                choice.textContent = item.querySelector('p').textContent;
+                IconList.classList.toggle('hidden');
+                arrowIcon.classList.toggle('rotate');
+            })
+        })
+    </script>
+  </body>
+</html>
