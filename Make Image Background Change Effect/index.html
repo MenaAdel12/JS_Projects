@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Image Background Change Effect</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="img-box">
+            <img src="background_change_img/transparent.png" width="100%">
+
+            <div class="img-wrap">
+                <img src="background_change_img/original.jpg" id="original">
+            </div>
+
+            <span id="line">
+                <img src="background_change_img/arrow.png" class="arrow">
+            </span>
+        </div>
+    </div>
+
+    <script>
+        const imgBox = document.querySelector('.img-box');
+        const imgWrap = document.querySelector('.img-wrap');
+        const originalImg = document.getElementById('original')
+        const line = document.getElementById('line')
+
+        let spaceLeft = imgBox.offsetLeft;
+        originalImg.style.width = imgBox.offsetWidth + "px";
+
+        imgBox.addEventListener('mousemove', (e) => {
+            let boxWidth = (e.pageX - spaceLeft) + "px";
+            imgWrap.style.width = boxWidth
+            line.style.left = boxWidth
+        })
+
+    </script>
+</body>
+</html>
